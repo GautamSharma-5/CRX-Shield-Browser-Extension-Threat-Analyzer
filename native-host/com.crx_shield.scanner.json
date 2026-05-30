@@ -1,0 +1,12 @@
+{
+  "name": "com.crx_shield.scanner",
+  "description": "CRX-Shield Native Scanner Host",
+  "path": "C:\\Users\\ASUS\\OneDrive\\Desktop\\Extension\\native-host\\host.bat",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://phmlpolkmlpepokemfghclgcphifpcgp/"
+  ],
+  "allowed_extensions": [
+    "crx_shield@scanner.addon"
+  ]
+}

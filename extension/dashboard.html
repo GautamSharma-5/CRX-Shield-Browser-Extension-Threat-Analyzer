@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRX-Shield Security Dashboard</title>
+  <!-- Google Fonts: Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+  <!-- Background Ambient Glows -->
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <span class="logo-shield">🛡️</span>
+        <div class="logo-text">
+          <h1>CRX-SHIELD</h1>
+          <p>Browser Extension Threat Analyzer & Policy Auditor</p>
+        </div>
+      </div>
+      <div class="header-academic-tag">
+        <span>SECURITY DISSERTATION PROJECT</span>
+      </div>
+    </header>
+
+    <!-- Real-time Alert Banner (hidden by default) -->
+    <div id="alert-banner" class="alert-banner hide">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-content">
+        <h3>Critical Threat Detected</h3>
+        <p>A newly installed extension "<span id="alert-ext-name">Unknown</span>" has a high threat score of <span id="alert-ext-score">0</span>/100.</p>
+      </div>
+      <div class="alert-actions">
+        <button id="alert-disable-btn" class="btn btn-danger-filled">Disable Immediately</button>
+        <button id="alert-dismiss-btn" class="btn btn-secondary">Dismiss</button>
+      </div>
+    </div>
+
+    <!-- Health Dashboard Overview -->
+    <section class="overview-section">
+      <div class="health-card" id="health-status-card">
+        <div class="health-indicator pulse-green" id="health-indicator"></div>
+        <div class="health-text">
+          <h2 id="health-status-title">System Protected</h2>
+          <p id="health-status-desc">All installed extensions analyzed and verified safe.</p>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-label">Total Extensions</span>
+          <span class="stat-val" id="stat-total">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Threats Flagged</span>
+          <span class="stat-val text-danger" id="stat-threats">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Green Flagged</span>
+          <span class="stat-val text-success" id="stat-whitelisted">0</span>
+        </div>
+        <div class="stat-card flex-center">
+          <button id="run-audit-btn" class="btn btn-primary-filled">Run Full Audit</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Workspace -->
+    <div class="main-workspace">
+      <!-- Extensions List Container -->
+      <main class="content-area">
+        <div class="content-header">
+          <h2>Detected Extensions</h2>
+          <div class="filters-bar">
+            <input type="text" id="search-input" placeholder="Search by name, ID, or permission..." class="search-input">
+            <select id="sort-select" class="sort-select">
+              <option value="risk-desc">Highest Risk First</option>
+              <option value="risk-asc">Lowest Risk First</option>
+              <option value="name-asc">Alphabetical (A-Z)</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="loading-spinner" class="loading-container hide">
+          <div class="spinner"></div>
+          <p>Analyzing extensions with Python Host Engine...</p>
+        </div>
+
+        <div id="extensions-list" class="extensions-list">
+          <!-- Dynamically populated via dashboard.js -->
+        </div>
+
+        <div id="empty-state" class="empty-state hide">
+          <h3>No Extensions Detected</h3>
+          <p>Load unpacked extensions or download them from the store to scan.</p>
+        </div>
+      </main>
+
+      <!-- Sidebar Status & Terminal Logs -->
+      <aside class="sidebar-area">
+        <div class="sidebar-card">
+          <h3>Scanner Engine Status</h3>
+          <div class="host-status" id="host-status-box">
+            <div class="status-circle status-connecting" id="host-status-circle"></div>
+            <span id="host-status-text">Connecting to Python Host...</span>
+          </div>
+          <p class="host-description">
+            Communicating via Chromium Native Messaging. The local Python backend executes binary scanners and walks extension storage directories.
+          </p>
+        </div>
+
+        <div class="sidebar-card log-card">
+          <h3>Host Console Activity</h3>
+          <div class="console-box" id="console-logs">
+            <div class="log-line log-system">[System] Initializing CRX-Shield Dashboard...</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="trusted_extensions.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

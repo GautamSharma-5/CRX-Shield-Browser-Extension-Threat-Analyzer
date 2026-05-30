@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "CRX-Shield Threat Analyzer",
+  "version": "1.0",
+  "description": "Dissertation Project: Real-time security scanner and heuristic analysis tool for browser extensions.",
+  "permissions": [
+    "management",
+    "nativeMessaging",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {},
+  "options_page": "dashboard.html"
+}
